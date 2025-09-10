@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/penguin/**)",
+      "Read(/home/catred/.claude/**)",
+      "Read(/home/catred/.claude/**)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "/home/catred/.claude"
+    ]
+  }
+}

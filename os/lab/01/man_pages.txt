@@ -1,0 +1,16 @@
+Man pages required:
+
+stat
+https://man7.org/linux/man-pages/man2/lstat.2.html
+
+perror
+https://man7.org/linux/man-pages/man3/perror.3.html
+
+opendir
+https://man7.org/linux/man-pages/man3/opendir.3.html
+
+readdir
+https://www.man7.org/linux/man-pages/man3/readdir.3.html
+
+closedir
+https://man7.org/linux/man-pages/man3/closedir.3.html 
