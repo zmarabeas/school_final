@@ -73,7 +73,7 @@ void cmd_room() {
     printf("Classroom: State Hall, Room 1109\n");
 }
 
-void cmd_desp() {
+void cmd_desc() {
     printf("Course Description:\n");
     printf("CSC 4420 Computer Operating Systems\n\n");
     printf("Operating system is an essential software layer to use various computing devices.\n");
@@ -121,13 +121,13 @@ void cmd_ta() {
 
 void cmd_tol() {
     printf("TA Office Locations:\n");
-    printf("- Tyler LaFrance: (Office location not specified)\n");
+    printf("- Tyler LaFrance: Rm 3101.2, 5057 Woodward Avenue\n");
     printf("- Mona Zamiri: (Office location not specified)\n");
 }
 
 void cmd_toh() {
     printf("TA Office Hours:\n");
-    printf("- Tyler LaFrance: (Office hours not specified)\n");
+    printf("- Tyler LaFrance: Fridays 11:00 AM - 12:00 PM (Rm 3101.2) or by appointment via MS Teams\n");
     printf("- Mona Zamiri: (Office hours not specified)\n");
 }
 
@@ -156,7 +156,7 @@ void cmd_help() {
     printf("  url      - Course website\n");
     printf("  hour     - Class times\n");
     printf("  room     - Classroom location\n");
-    printf("  desp     - Course description\n");
+    printf("  desc     - Course description\n");
     printf("  text     - Textbook information\n");
     printf("  ref      - Reference books\n");
     printf("  prof     - Professor's name\n");
@@ -188,8 +188,8 @@ int process_command(char *input) {
         cmd_hour();
     } else if (strcmp(command, "room") == 0) {
         cmd_room();
-    } else if (strcmp(command, "desp") == 0) {
-        cmd_desp();
+    } else if (strcmp(command, "desc") == 0) {
+        cmd_desc();
     } else if (strcmp(command, "text") == 0) {
         cmd_text();
     } else if (strcmp(command, "ref") == 0) {
