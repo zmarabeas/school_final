@@ -7,21 +7,34 @@
 #define MAX_HISTORY 100
 #define MAX_PROMPT 256
 
+// history structure - stores commands user has typed
+// this is like the shell's memory of what you did
 typedef struct {
-    char **commands;
-    int count;
-    int capacity;
+    char **commands;    // array of strings for each command
+    int count;          // how many commands we have stored
+    int capacity;       // how much space we allocated
 } History;
+
+// command table entry - maps command names to functions
+// this is how the shell knows what function to call for each command
+typedef struct {
+    char *name;         // command name like "help" or "exit"
+    void (*func)();     // function pointer - points to the function to call
+} Command;
 
 History history = {NULL, 0, 0};
 char custom_prompt[MAX_PROMPT] = "CSC4420[%h]$ ";
 
+// set up memory for storing command history
+// malloc is a system call that asks the os for memory
 void init_history() {
     history.capacity = 10;
     history.commands = malloc(history.capacity * sizeof(char*));
     history.count = 0;
 }
 
+// add a new command to our history list
+// realloc grows our memory if we need more space
 void add_to_history(const char *command) {
     if (history.count >= history.capacity) {
         history.capacity *= 2;
@@ -32,6 +45,8 @@ void add_to_history(const char *command) {
     history.count++;
 }
 
+// free all the memory we used for history
+// important to clean up or we get memory leaks
 void cleanup_history() {
     for (int i = 0; i < history.count; i++) {
         free(history.commands[i]);
@@ -39,6 +54,8 @@ void cleanup_history() {
     free(history.commands);
 }
 
+// show the shell prompt to the user
+// replaces %h with current history number
 void display_prompt() {
     char prompt[MAX_PROMPT];
     strcpy(prompt, custom_prompt);
@@ -58,7 +75,7 @@ void display_prompt() {
     }
     
     printf("%s", prompt);
-    fflush(stdout);
+    fflush(stdout);  // force output to show immediately
 }
 
 void cmd_url() {
@@ -174,49 +191,50 @@ void cmd_help() {
     printf("  exit/quit       - Exit the shell\n");
 }
 
+// command table - this is how real shells work!
+// function pointers let us call different functions by name
+// much cleaner than a giant if-else chain
+Command commands[] = {
+    {"url", cmd_url},
+    {"hour", cmd_hour},
+    {"room", cmd_room},
+    {"desc", cmd_desc},
+    {"text", cmd_text},
+    {"ref", cmd_ref},
+    {"prof", cmd_prof},
+    {"pol", cmd_pol},
+    {"poh", cmd_poh},
+    {"pma", cmd_pma},
+    {"ta", cmd_ta},
+    {"tol", cmd_tol},
+    {"toh", cmd_toh},
+    {"tma", cmd_tma},
+    {"help", cmd_help},
+    {NULL, NULL}  // end of table marker
+};
+
+// parse and execute commands - this is the heart of the shell
+// strtok breaks up the input string into words
 int process_command(char *input) {
     char *command = strtok(input, " \t\n");
     if (command == NULL) {
         return 0;
     }
     
+    // handle exit/quit specially since they return 1
     if (strcmp(command, "exit") == 0 || strcmp(command, "quit") == 0) {
         return 1;
-    } else if (strcmp(command, "url") == 0) {
-        cmd_url();
-    } else if (strcmp(command, "hour") == 0) {
-        cmd_hour();
-    } else if (strcmp(command, "room") == 0) {
-        cmd_room();
-    } else if (strcmp(command, "desc") == 0) {
-        cmd_desc();
-    } else if (strcmp(command, "text") == 0) {
-        cmd_text();
-    } else if (strcmp(command, "ref") == 0) {
-        cmd_ref();
-    } else if (strcmp(command, "prof") == 0) {
-        cmd_prof();
-    } else if (strcmp(command, "pol") == 0) {
-        cmd_pol();
-    } else if (strcmp(command, "poh") == 0) {
-        cmd_poh();
-    } else if (strcmp(command, "pma") == 0) {
-        cmd_pma();
-    } else if (strcmp(command, "ta") == 0) {
-        cmd_ta();
-    } else if (strcmp(command, "tol") == 0) {
-        cmd_tol();
-    } else if (strcmp(command, "toh") == 0) {
-        cmd_toh();
-    } else if (strcmp(command, "tma") == 0) {
-        cmd_tma();
-    } else if (strcmp(command, "history") == 0) {
+    }
+    
+    // handle special commands that need arguments
+    if (strcmp(command, "history") == 0) {
         char *arg = strtok(NULL, " \t\n");
         int limit = arg ? atoi(arg) : 0;
         cmd_history(limit);
-    } else if (strcmp(command, "help") == 0) {
-        cmd_help();
-    } else if (strcmp(command, "prompt") == 0) {
+        return 0;
+    }
+    
+    if (strcmp(command, "prompt") == 0) {
         char *new_prompt = strtok(NULL, "\n");
         if (new_prompt != NULL) {
             while (*new_prompt == ' ' || *new_prompt == '\t') new_prompt++;
@@ -226,44 +244,63 @@ int process_command(char *input) {
         } else {
             printf("Usage: prompt <string>\n");
         }
-    } else {
-        printf("Unknown command: %s\n", command);
-        printf("Type 'help' for available commands.\n");
+        return 0;
     }
     
+    // look up command in our table - this is much cleaner!
+    // loop through the command table until we find a match
+    for (int i = 0; commands[i].name != NULL; i++) {
+        if (strcmp(command, commands[i].name) == 0) {
+            commands[i].func();  // call the function using function pointer
+            return 0;
+        }
+    }
+    
+    // if we get here, command wasn't found
+    printf("Unknown command: %s\n", command);
+    printf("Type 'help' for available commands.\n");
     return 0;
 }
 
+// main function - this is where the shell starts running
+// shells are just programs that run in a loop waiting for commands
 int main() {
     char input[MAX_INPUT];
     
+    // set up our data structures
     init_history();
     
     printf("CSC4420 Shell - Fall 2025\n");
     printf("Type 'help' for available commands.\n\n");
     
+    // main shell loop - this is how all shells work!
+    // read-eval-print loop: read command, execute it, show result, repeat
     while (1) {
         display_prompt();
         
+        // fgets reads a line from stdin (standard input)
+        // stdin is a file descriptor that the os gives us
         if (fgets(input, sizeof(input), stdin) == NULL) {
             printf("\n");
-            break;
+            break;  // user pressed ctrl-d (end of file)
         }
         
         if (strlen(input) > 1) {
-            input[strcspn(input, "\n")] = '\0';
+            input[strcspn(input, "\n")] = '\0';  // remove newline
             add_to_history(input);
             
+            // make a copy because strtok modifies the string
             char input_copy[MAX_INPUT];
             strcpy(input_copy, input);
             
+            // execute the command
             if (process_command(input_copy)) {
-                break;
+                break;  // time to exit
             }
         }
     }
     
     printf("Goodbye!\n");
-    cleanup_history();
+    cleanup_history();  // always clean up memory!
     return 0;
 }
