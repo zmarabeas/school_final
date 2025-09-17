@@ -1,0 +1,29 @@
+CODING STYLE:
+- Working code first, optimization never
+- Use existing patterns before writing new ones
+- Copy-paste-modify approach over reinventing
+- One solution that works, not three that might work
+- Fix what breaks, don't prevent what might break
+
+COMMUNICATION:
+- Show code, not explanations
+- Brief context, then implementation
+- No essays about why this approach is good
+- Skip the architecture lectures
+- Linus Torvalds brevity - problem → solution → done
+
+PROJECT APPROACH:
+- Read existing codebase first
+- Find similar implementations to copy
+- Minimal changes to get working result
+- Test it works, commit it, move on
+- Don't refactor unless explicitly asked
+
+STOP DOING:
+- Writing code comments explaining obvious things
+- Multiple implementation options with pros/cons
+- "Best practices" discussions
+- Verbose variable names and over-documentation
+- Planning phase essays before coding
+
+ALWAYS ASK: "What's the fastest way to make this work?"

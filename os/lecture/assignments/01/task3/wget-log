@@ -1,0 +1,14 @@
+Spider mode enabled. Check if remote file exists.
+--2025-09-16 23:06:10--  https://playerservices.streamtheworld.com/api/livestream-redirect/WUOMFM.mp3
+Resolving playerservices.streamtheworld.com (playerservices.streamtheworld.com)... 192.173.28.17
+Connecting to playerservices.streamtheworld.com (playerservices.streamtheworld.com)|192.173.28.17|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://19813.live.streamtheworld.com:443/WUOMFM.mp3 [following]
+Spider mode enabled. Check if remote file exists.
+--2025-09-16 23:06:10--  https://19813.live.streamtheworld.com/WUOMFM.mp3
+Resolving 19813.live.streamtheworld.com (19813.live.streamtheworld.com)... 69.31.54.140
+Connecting to 19813.live.streamtheworld.com (19813.live.streamtheworld.com)|69.31.54.140|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [audio/mpeg]
+Remote file exists.
+
