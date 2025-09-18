@@ -1,0 +1,61 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h3>  Fun with Processes/Threads </h3> due on Oct. 2, 2025, 3:00pm. <p>
+
+
+Do every problem by yourself. <b> Do NOT </b> search for solutions  from internet, previous classes or other students.  </p><p>
+
+</p><ol> 
+
+Read Sec. 2.1 and Sec. 2.2 before you start the problems. <p> <br>
+
+
+</p><li> (10 pts) (Problem 2.9.) Assume that you are trying to download a
+ large 2-GB file from the Internet. The file is available from a set of 
+mirror servers, each of which can deliver a subset of the file's bytes; 
+assume that a given request specifies the starting and ending bytes of 
+the file.  Explain how you might use threads to improve the download 
+time. <p> <br>
+
+</p></li><li> (10 pts) Write a multithread C program to count the number
+ of prime numbers within a given range [low,high] (inclusive), where the
+ program should be able to take in the number of threads as an argument.
+ You may use this single thread <a href="https://lihaoxu.eng.wayne.edu/Courses/CSC4420/Note/prime_cnt2.c"> program </a> in anyway you like. ( Here is a <a href="https://lihaoxu.eng.wayne.edu/Courses/CSC4420/Homework/prime_cnt8"> reference implmentation </a> ( executable only ), and you can check your results against this one to see if they match. ) <p>
+<br>
+</p></li><li> (10 pts) Write a simple test program to find out the <em> parent process id </em> of a process <b> before</b> and <b>after</b>
+ its parent process terminates. Based on your test results, answer the 
+following question: what is a process's parent process after its 
+original parent process terminates? <p>
+<br>
+
+</p></li><li> (10 pts) Write a simple test program to find out PIDs of 
+ALL ancestor (i.e., parent, grandparent ) processes of the current 
+process or a given process specified by a PID. A parent process's PID of
+ a given process pid can be found in /proc/$pid/status  <p>
+<br>
+
+
+</p></li><li> (20 pts) Problem 1.35. Run the program on your <b> OWN </b>
+ laptop/desktop, and record the maximum number of child processes you 
+see before your system crashes, as well as your machine's memory size. <p>
+( For those who doesn't have this edition of the textbook, the problem 
+is as follows: If you have a personal UNIX-like system available that 
+you can safely crash and reboot, write a shell script that attempts to 
+create an unlimited number of child processes and observe what happens. 
+Before running the experiment, type sync to the shell to flush the file 
+system buffers to disk to avoid ruining the file system. ) </p><p>
+
+Again, do <b> NOT </b> run the experiment on any shared system. You can write a C/C++ program instead of shell script for this experiment. Do <b> NOT </b>
+ search for solutions. ( There is one on internet, but I doubt you would
+ understand it, otherwise you wouldn't need to take this course now. ) </p><p>
+
+<br>
+
+</p></li><li> (20 pts) Design and run an experiment to measure the CPU time used by <em> fork </em>. ( You may want to use
+the system call <em> times </em>. ) Also report the CPU of the machine you run the experiment. <p>
+
+
+
+</p></li></ol>
+
+
+</body></html>
