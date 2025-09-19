@@ -1,0 +1,1 @@
+CVE-2008-4309 is an integer overflow vulnerability in Net-SNMP agent with a CVSS score of 5.0 (Medium). The issue allows remote attackers to cause denial of service via integer overflow in the netsnmp_create_subtree_cache function, affecting Net-SNMP versions 5.2-5.4. Fix by upgrading to patched versions 5.4.2.1+, 5.3.2.3+, or 5.2.5.1+.

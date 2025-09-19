@@ -1,0 +1,28 @@
+Lab View – Performing a Vulnerability Assessment (4e)
+
+This lab focuses on performing vulnerability assessments in cybersecurity.
+
+The lab content is delivered through a virtual lab environment accessible via a web interface.
+
+Key Features:
+- Virtual labs support for hands-on learning
+- System compatibility checking
+- Network connection testing
+- Technical support integration
+- Lab progress tracking
+- Screenshot and deliverable submission capabilities
+
+Lab Environment Requirements:
+- HTML5 compatible browser (Chrome, Firefox, or Edge recommended)
+- Cookies enabled
+- Stable network connection (minimum 0.4 Mbps download speed recommended)
+- Low latency connection (under 125ms optimal)
+
+The lab includes:
+- Interactive virtual machines
+- Step-by-step exercises
+- Progress tracking system
+- Deliverable submission system
+- Technical support integration
+
+Lab identifies as being part of the "Nav_Funsec4e" group from JonesBartlett publisher.
